@@ -1,0 +1,98 @@
+<h2> Template: <small>Dinámicos</small>  </h2>
+<hr>
+
+
+<form (ngSubmit)="save()" autocomplete="off" #formulario="ngForm">
+
+
+
+<!-- Nombre -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form"> Nombre </label>
+        <div class="col-sm-9 ">
+            <input class="form-control"
+                   placeholder="Nombre de la persona"
+                   name="name"
+                   [(ngModel)]="person.name"
+                   required
+            >
+
+            <span 
+            class="form-text text-danger"
+            *ngIf="formulario.controls?.name?.errors && formulario.controls?.nombre?.touched"
+            > 
+            Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+
+<!-- Agregar favorito -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form"> Agregar  </label>
+        <div class="col-sm-9 ">
+            <div class="input-group">
+                <input 
+                    class="form-control"
+                    placeholder="Agregar favorito"
+                    [(ngModel)]="newAnime"
+                    name="newAnime"
+                >
+                <button 
+                    class="btn btn-outline-primary"
+                    type="button"
+                    (click)="add()"
+                >
+                    Agregar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Lista de juegos favoritos -->
+<div class="mb-3 row">
+    <label class="col-sm-3 col-form"> Favoritos </label>
+    <div class="col-sm-9 ">
+
+        <div class="input-group mb-1"
+             *ngFor="let anime of person.favorites; let i = index"
+        >
+            <input
+                class="form-control mb-1"
+                name="favorite_{{ i }}"
+                [(ngModel)]="anime.name"
+                required
+            >
+
+            <button
+                class="btn btn-outline-danger"
+                type="button"
+                (click)="delete(i)"
+            >
+                eliminar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="row mt-3">
+        <div class="col">
+            <button 
+                type="button" 
+                (click)="save()"
+                class="btn btn-primary float-end" 
+                [disabled]="formulario.invalid"
+            >
+                Guardar
+            </button>
+        </div>
+    </div>
+
+</form>
+
+
+<span>Person</span>
+<pre> {{ person | json }} </pre>
