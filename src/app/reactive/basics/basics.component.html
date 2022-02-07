@@ -1,1 +1,97 @@
-<p>basics works!</p>
+<h2> Reactives: básicos </h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off"
+              [formGroup]="formulario"
+              (ngSubmit)="save()"
+        >
+
+            <!-- campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+                    <input type="text" 
+                           class="form-control"
+                           formControlName="name"
+                           placeholder="Nombre del producto"
+                    >
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="fieldNoValid('name')"
+                    > 
+                        Debe de ser de 3 letras 
+                    </span>
+                </div>
+            </div>
+
+            <!-- Campo Precio del producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number" 
+                           class="form-control"
+                           formControlName="price"
+                           placeholder="Precio del producto" 
+                    >
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="fieldNoValid('price')"
+                    > 
+                        El precio debe de ser 0 o mayor
+                    </span>
+                </div>
+            </div>
+
+            <!-- Campo de existencias -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <input type="number" 
+                            class="form-control"
+                            formControlName="existencias"
+                            placeholder="Existencias del producto" 
+                    >
+
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="fieldNoValid('existencias')"
+                    > 
+                        las existencisa deben ser 0 o mayor
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end"
+                             >
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+
+        <span> valid </span>
+        <pre> {{ formulario.valid }} </pre>
+
+        <span>Touch </span>
+        <pre> {{ formulario.touched }} </pre>
+
+        <span>Pristine </span>
+        <pre> {{ formulario.pristine }} </pre>
+
+        <span>value </span>
+        <pre> {{ formulario.value | json }} </pre>
+
+    </div>
+</div>

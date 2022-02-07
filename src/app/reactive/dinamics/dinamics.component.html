@@ -1,1 +1,121 @@
-<p>dinamics works!</p>
+<h2> Reactives: <small>Dinámicos</small>  </h2>
+<hr>
+
+
+<form
+        autocomplete="off"
+        [formGroup]="formulario"
+        (ngSubmit)="save()"
+>
+
+
+
+<!-- Nombre -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form"> Nombre </label>
+        <div class="col-sm-9 ">
+            <input 
+                   class="form-control"
+                   formControlName="name"
+                   placeholder="Nombre de la persona"
+            >
+
+            <span 
+                class="form-text text-danger"
+                *ngIf="fieldNoValid('name')"
+            > 
+                Este campo es obligatorio y debe tener al menos 3 caracteres
+            </span>
+        </div>
+    </div>
+
+
+<!-- Agregar favorito -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form"> Agregar  </label>
+        <div class="col-sm-9 ">
+            <div class="input-group">
+                <input 
+                    class="form-control"
+                    placeholder="Agregar favorito"
+                    [formControl]="newFavorite"
+                    (keyup.enter)="addNewFavorite()"
+
+                >
+                <button 
+                    class="btn btn-outline-primary"
+                    type="button"
+                    (click)="addNewFavorite()"
+                >
+                    Agregar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Lista de juegos favoritos -->
+<div class="mb-3 row">
+    <label class="col-sm-3 col-form"> Favoritos </label>
+    <div class="col-sm-9 " formArrayName="favorites">
+
+        <div 
+            class="input-group mb-1"
+            *ngFor="let favorite of favoritesArr.controls; let i = index"
+        >
+            <input
+                class="form-control mb-1"
+                [formControlName]="i"
+            >
+
+            <button
+                class="btn btn-outline-danger"
+                type="button"
+                (click)="deleteFavorite(i)"
+            >
+                eliminar
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="row mt-3">
+        <div class="col">
+            <button 
+                type="submit" 
+                class="btn btn-primary float-end" 
+            >
+                Guardar
+            </button>
+        </div>
+    </div>
+
+</form>
+
+
+<div class="row">
+
+    <div class="col">
+        <span> valid </span>
+        <pre> {{ formulario.valid }} </pre>
+        
+        <span>Touch </span>
+        <pre> {{ formulario.touched }} </pre>
+        
+        <span>Pristine </span>
+        <pre> {{ formulario.pristine }} </pre>
+        
+        <span>value </span>
+        <pre> {{ formulario.value | json }} </pre>
+        <hr>
+
+        <span>nuevo favorito </span>
+        <pre> {{ newFavorite.value | json }} </pre>
+
+        <span>nuevo favorito valid </span>
+        <pre> {{ newFavorite.valid }} </pre>
+    </div>
+
+</div>
