@@ -1,0 +1,150 @@
+<h2> validaciones reactivas </h2>
+<hr>
+
+
+<div class="row">
+    <div class="col">
+        <form [formGroup]="miformulario" 
+              autocomplete="off" 
+              (ngSubmit)="create()"
+        >
+
+<!-- nombre -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control"
+                           formControlName="name"
+                           placeholder="Nombre del usuario"
+                    >
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="validNoField('name')"
+                    >
+                        Debe de ser en formato de nombre y apellido
+                    </span>
+                </div>
+            </div>
+
+
+<!-- email -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email"
+                            class="form-control"
+                            formControlName="email"
+                            placeholder="Email del usuario"
+                            >
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="validNoField('email')"
+                    >
+                        {{ emailErrorMsg }}
+                    </span>
+                </div>
+            </div>
+
+
+<!-- username -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Username</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                            class="form-control"
+                            placeholder="nombre código del usuario"
+                            formControlName="username"
+                            >
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="validNoField('username')"
+                    >
+                        No puede ser strider
+                    </span>
+                </div>
+            </div>
+
+<!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                    <input type="password"
+                            class="form-control"
+                            autocomplete="off"
+                            formControlName="password"
+                            placeholder="contraseña del usuario"
+                    >
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="validNoField('password')"
+                    >
+                        la contraseña debe de ser mayor a 6 chrs
+                    </span>
+                </div>
+            </div>
+
+<!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Confirmar</label>
+                <div class="col-sm-9">
+                    <input type="password"
+                            class="form-control"
+                            autocomplete="off"
+                            formControlName="confirmPassword"
+                            placeholder="confirmar la contraseña"
+                    >
+                    <span 
+                        class="form-text text-danger"
+                        *ngIf="validNoField('confirmPassword')"
+                    >
+                        las contraseñas deben ser iguales
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            [disabled]="miformulario.pending " 
+                            type="submit" 
+                    >
+                        Crear
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <!-- <h4> form value </h4>
+        <pre> {{ miformulario.value | json }} </pre> -->
+        
+        <h4> Form valid {{ miformulario.valid }} </h4>
+
+        <h4> Form valid {{ miformulario.status }} </h4>
+
+        <h4> errors Form </h4>
+        <pre> {{ miformulario.errors | json }} </pre>
+        
+        <h4> errors Name </h4>
+        <pre> {{ miformulario.controls.name.errors | json }} </pre>
+
+        <h4> errors Email </h4>
+        <pre> {{ miformulario.controls.email.errors | json }} </pre>
+
+        <h4> errors username </h4>
+        <pre> {{ miformulario.controls.username.errors | json }} </pre>
+
+        <h4> errors password </h4>
+        <pre> {{ miformulario.controls.password.errors | json }} </pre>
+
+        <h4> errors confirm password </h4>
+        <pre> {{ miformulario.controls.confirmPassword.errors | json }} </pre>
+    </div>
+</div>
